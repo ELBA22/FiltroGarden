@@ -15,5 +15,17 @@ namespace Application.Repository
         {
             _context = context;
         }
+
+        public Task<int> GetConsulta4()
+        {
+            var consulta = from producto in _context.Productos
+                        join detalle in _context.DetallePedidos
+                        on producto.CodigoProducto equals detalle.CodigoProducto
+                        into detallesProducto
+                        select detallesProducto.Sum(dp => dp.Cantidad);
+            int resultado = consulta.FirstOrDefault();
+            return Task.FromResult(resultado);
+        }
+
     }
 }

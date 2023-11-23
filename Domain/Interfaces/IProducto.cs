@@ -8,6 +8,6 @@ namespace Domain.Interfaces
 {
     public interface IProducto :IGenericRepository<Producto>
     {
-        
+        public Task<int> GetConsulta4();
     }
 }
