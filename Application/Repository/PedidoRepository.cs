@@ -15,5 +15,15 @@ namespace Application.Repository
         {
             _context = context;
         }
+
+
+        public Task<IQueryable<string>> getConsulta1()
+        {
+            var consulta = from pedido in _context.Pedidos
+                        where pedido.FechaEsperada < pedido.FechaEntrega
+                        select pedido.CodigoPedido + " " + pedido.CodigoCliente + " " + pedido.FechaEsperada + " " + pedido.FechaEntrega;
+
+            return Task.FromResult(consulta);
+        }
     }
 }

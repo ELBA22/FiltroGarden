@@ -8,6 +8,8 @@ namespace Domain.Interfaces
 {
     public interface IPedido :IGenericRepository<Pedido>
     {
+
+        public Task<IQueryable<string>> getConsulta1();
         
     }
 }
