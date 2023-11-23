@@ -15,6 +15,8 @@ namespace Domain.Interfaces
         IPago Pagos {get;}
         IPedido Pedidos {get;}
         IProducto Productos {get;}
+        object Cliente { get; }
+
         Task<int> SaveAsync();
         
     }

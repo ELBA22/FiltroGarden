@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class PedidoController :ApiController
+    public class PedidoController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -34,22 +34,22 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<PedidoDto>> Get(int id)
         {
-            var cliente = await _unitOfWork.Clientes.GetByIdAsync(id);
+            var cliente = await _unitOfWork.Pedidos.GetByIdAsync(id);
             if (cliente == null)
             {
                 return NotFound();
             }
             return _mapper.Map<PedidoDto>(cliente);
         }
-        
-      //Consulta
-    /*   [HttpGet("Consulta1")]
-      public async Task<IActionResult> GetConsulta1()
-      {
-        var consulta = await _unitOfWork.Clientes.getConsulta1().ConfigureAwait(false);
-        return Ok(consulta);
-      }
- */
+
+        //Consulta
+        [HttpGet("Consulta1")]
+        public async Task<IActionResult> GetConsulta1()
+        {
+            var consulta = await _unitOfWork.Pedidos.getConsulta1().ConfigureAwait(false);
+            return Ok(consulta);
+        }
+
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -76,7 +76,7 @@ namespace API.Controllers
             {
                 pedidoDto.CodigoPedido = id;
             }
-            if (pedidoDto.CodigoPedido!= id)
+            if (pedidoDto.CodigoPedido != id)
             {
                 return NotFound();
             }
@@ -100,7 +100,7 @@ namespace API.Controllers
             await _unitOfWork.SaveAsync();
             return NoContent();
         }
-        
+
     }
 }
 

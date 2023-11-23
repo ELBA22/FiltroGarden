@@ -41,12 +41,13 @@ namespace API.Controllers
             }
             return _mapper.Map<ProductoDto>(producto);
         }
-
-/*         [HttpGet("Consulta4")]
-        public async Task<IActionResult>GetConsulta4()
+        //Consulta
+       [HttpGet("Consulta4")]
+        public async Task<IActionResult> GetConsulta4()
         {
-            var consulta = await _unitOfWork.Clientes.getConsulta4().ConfigureAwait(false);
-        } */
+            var consulta = await _unitOfWork.Productos.getConsulta4().ConfigureAwait(false);
+            return Ok(consulta);
+        } 
 
 
         [HttpPost]

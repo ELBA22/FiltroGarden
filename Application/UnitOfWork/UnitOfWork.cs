@@ -122,6 +122,7 @@ namespace Application.UnitOfWork
             }
         }
 
+        public object Cliente => throw new NotImplementedException();
 
         public void Dispose()
         {

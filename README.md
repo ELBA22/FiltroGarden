@@ -334,6 +334,11 @@ http://localhost:5229/api/Pedido/{id}
 DELETE
 http://localhost:5229/api/Pedido/{id}
 
+Para esta consulta se filtran pedidos donde la fecha esperada es menor a la fecha de entrega entonces construye una cadena, devolviendo el resultado.
+
+GET
+http://localhost:5229/api/Pedido/Consulta1
+
 Producto
 
 
@@ -351,6 +356,14 @@ http://localhost:5229/api/Producto/{id}
 
 DELETE
 http://localhost:5229/api/Producto/{id}
+
+Para esta consulta usamos el metodo join para conectar dos tablas(producto y detallePedidos, buscando la suma de pedidos agrupados por productos, y entonces esta devuelve como entero.)
+GET
+http://localhost:5229/api/Producto/Consulta4
+
+
+
+
 
 
 
