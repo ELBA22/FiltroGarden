@@ -11,7 +11,7 @@ public partial class Empleado
 
     public string Apellido1 { get; set; } = null!;
 
-    public string? Apellido2 { get; set; }
+    public string Apellido2 { get; set; }
 
     public string Extension { get; set; } = null!;
 
@@ -19,13 +19,13 @@ public partial class Empleado
 
     public string CodigoOficina { get; set; } = null!;
 
-    public int? CodigoJefe { get; set; }
+    public int CodigoJefe { get; set; }
 
-    public string? Puesto { get; set; }
+    public string Puesto { get; set; }
 
     public virtual ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();
 
-    public virtual Empleado? CodigoJefeNavigation { get; set; }
+    public virtual Empleado CodigoJefeNavigation { get; set; }
 
     public virtual Oficina CodigoOficinaNavigation { get; set; } = null!;
 

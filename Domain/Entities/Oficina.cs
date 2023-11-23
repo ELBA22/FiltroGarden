@@ -11,7 +11,7 @@ public partial class Oficina
 
     public string Pais { get; set; } = null!;
 
-    public string? Region { get; set; }
+    public string Region { get; set; }
 
     public string CodigoPostal { get; set; } = null!;
 
@@ -19,7 +19,7 @@ public partial class Oficina
 
     public string LineaDireccion1 { get; set; } = null!;
 
-    public string? LineaDireccion2 { get; set; }
+    public string LineaDireccion2 { get; set; }
 
     public virtual ICollection<Empleado> Empleados { get; set; } = new List<Empleado>();
 }
