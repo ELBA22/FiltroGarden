@@ -8,12 +8,12 @@ using Persistence.Data;
 
 namespace Application.Repository
 {
-    public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
+    public class OficinaRepository : GenericRepository<Oficina>, IOficina
     {
         private readonly GardenContext _context;
-        public EmpleadoRepository(GardenContext context) : base(context)
+        public OficinaRepository(GardenContext context) : base(context)
         {
-            _context = context;
+            _context =  context;
         }
     }
 }
