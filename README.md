@@ -51,10 +51,7 @@ namespace Domain.Interfaces
         IPago Pagos {get;}
         IPedido Pedidos {get;}
         IProducto Productos {get;}
-        IRefreshToken RefreshTokens {get;}
-        IRol Rols {get; }
-        IUser Users {get; }
-
+      
 
         Task<int> SaveAsync();
     }
