@@ -2,7 +2,7 @@
 
 # Proyecto Jardineria.
 
-## Creacion Entities y DbContext con DbFirts.
+## Creacion Entities, Configuraciones y DbContext con DbFirts.
 ## Codigo que se debe usar para la creacion de entidades, configuraciones y Context del proyecto, DbFirts.
 
 ```
@@ -207,6 +207,98 @@ namespace Application.Repositories
     }
 }
 ```
+
+
+# Extensions.
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Application.UnitOfWork;
+using AspNetCoreRateLimit;
+using Domain.Interfaces;
+
+namespace API.Extensions
+{
+    public static class ApplicationServiceExtensions
+    {
+        public static void ConfigureCors(this  IServiceCollection services) =>
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    "CorsPolicy",
+                    builder =>
+                        builder
+                            .AllowAnyOrigin() //WithOrigins("https://domini.com")
+                            .AllowAnyMethod() //WithMethods(*GET", "POST")
+                            .AllowAnyHeader()
+                );
+            });
+
+        public static void AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+        }
+        public static void ConfigureRatelimiting(this IServiceCollection services)
+        {
+            services.AddMemoryCache();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            services.AddInMemoryRateLimiting();
+            services.Configure<IpRateLimitOptions>(options =>
+            {
+                options.EnableEndpointRateLimiting = true;
+                options.StackBlockedRequests = false;
+                options.HttpStatusCode = 429;
+                options.RealIpHeader = "X-Real-IP";
+                options.GeneralRules = new List<RateLimitRule>
+                {
+                    new RateLimitRule
+                    {
+                        Endpoint = "*",
+                        Period = "10s",
+                        Limit = 2
+                    }
+                };
+            }
+            );
+
+            
+        }
+ 
+            
+    }
+}
+```
+
+
+
+
+## Profiles
+```
+namespace API.Profiles
+{
+    public class MappingProfiles : Profile
+    {
+        public MappingProfiles()
+        {
+            CreateMap<Cliente, ClienteDto>().ReverseMap();
+            CreateMap<DetallePedido, DetallePedidoDto>().ReverseMap();
+            CreateMap<Empleado, EmpleadoDto>().ReverseMap();
+            CreateMap<GamaProducto, GamaProductoDto>().ReverseMap();
+            CreateMap<Oficina, OficinaDto>().ReverseMap();
+            CreateMap<Pago, PagoDto>().ReverseMap();
+            CreateMap<Pedido, PedidoDto>().ReverseMap();
+            CreateMap<Producto, ProductoDto>().ReverseMap();
+
+        }
+
+    }
+}
+
+```
+
+
 
 # Endpoints
 
